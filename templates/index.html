@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima con Python</title>
+    <style>
+        /* Estilo Global */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298); /* Fondo con gradiente */
+            color: #f1f1f1;
+            text-align: center;
+            padding: 50px 0;
+            transition: background 0.3s ease-in-out;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            color: #f7b42c; /* Color amarillo cálido */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Formulario */
+        form {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        input {
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            border: none;
+            width: 200px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border: 2px solid #f7b42c;
+            box-shadow: 0 0 10px rgba(247, 180, 44, 0.5);
+        }
+
+        button {
+            padding: 12px 30px;
+            background-color: #f7b42c; /* Amarillo cálido */
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e3c72; /* Azul más oscuro al hacer hover */
+            transform: scale(1.05);
+        }
+
+        button:active {
+            background-color: #0288d1;
+        }
+
+        /* Sección de clima */
+        .weather {
+            margin-top: 30px;
+            font-size: 22px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            width: 300px;
+            margin: 30px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .weather:hover {
+            transform: translateY(-10px);
+        }
+
+        .weather h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .weather p {
+            margin: 5px 0;
+        }
+
+        img {
+            width: 100px;
+            margin-top: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Estilo de errores */
+        .error {
+            color: #f44336;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Consulta el clima</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Ingresa una ciudad" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if weather %}
+        <div class="weather">
+            <h2>{{ weather.city }}</h2>
+            <p><strong>Temperatura:</strong> {{ weather.temp }}°C</p>
+            <p><strong>Condición:</strong> {{ weather.description }}</p>
+            <img src="{{ weather.icon }}" alt="Icono del clima">
+        </div>
+    {% endif %}
+</body>
+</html>
